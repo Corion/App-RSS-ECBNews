@@ -54,7 +54,7 @@ for my $item (@posts) {
     my $url = $item->{url};
 
     $item->{date} =~ m!^(\d{4})-(\d\d)-(\d\d)$!
-        or warn "Invalid date '$item->{date}'";
+        or warn "Invalid date '$item->{date}' ($item->{title})";
 
     my $date = DateTime->new( year => $1, month => $2, day => $3 );
 
