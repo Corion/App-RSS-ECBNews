@@ -9,6 +9,13 @@ use App::scrape 'scrape';
 use DateTime;
 use DateTime::Format::Mail;
 use File::Basename;
+use Getopt::Long;
+
+GetOptions(
+    'output|o=s' => \my $output_rss,
+);
+
+$output_rss //= 'ecbnews.rss';
 
 my $rss = XML::RSS->new(version => '2.0');
 
@@ -65,4 +72,7 @@ for my $item (@posts) {
     );
 };
 
-print $rss->as_string;
+open my $fh, '>', $output_rss
+    or die "Couldn't write RSS file '$output_rss': $!";
+
+print { $fh } $rss->as_string;
