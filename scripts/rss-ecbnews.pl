@@ -41,9 +41,9 @@ my $html = get $news_url;
 my @posts = grep { $_->{title} } scrape(
     $html,
     {
-        date => 'dt@isodate',
+        date  => 'dt@isodate',
         title => 'dd .title a',
-        url => 'dd .title a@href',
+        url   => 'dd .title a@href',
     },
     {
         base => $news_url,
@@ -58,11 +58,15 @@ for my $item (@posts) {
 
     my $date = DateTime->new( year => $1, month => $2, day => $3 );
 
+    use Data::Dumper;
+    warn Dumper $item;
+
     my $title = $item->{title};
     $rss->add_item(
         title => $title,
         uri => $url,
         permalink => $url,
+        link => $url,
         dc => {
             subject   => $title,
             creator   => basename $0,
