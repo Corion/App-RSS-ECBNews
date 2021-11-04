@@ -38,7 +38,7 @@ $rss->channel(
 my $news_url = 'https://www.ecb.europa.eu/paym/intro/news/html/index.en.html';
 my $html = get $news_url;
 
-my @posts = scrape(
+my @posts = grep { $_->{title} } scrape(
     $html,
     {
         date => 'dt@isodate',
