@@ -1,0 +1,9 @@
+
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Corion/App-RSS-ECBNews?branch=master&svg=true)](https://ci.appveyor.com/project/Corion/App-RSS-ECBNews)
+[![Windows](https://github.com/Corion/App-RSS-ECBNews/workflows/windows/badge.svg)](https://github.com/Corion/App-RSS-ECBNews/actions?query=workflow%3Awindows)
+[![MacOS](https://github.com/Corion/App-RSS-ECBNews/workflows/macos/badge.svg)](https://github.com/Corion/App-RSS-ECBNews/actions?query=workflow%3Amacos)
+[![Linux](https://github.com/Corion/App-RSS-ECBNews/workflows/linux/badge.svg)](https://github.com/Corion/App-RSS-ECBNews/actions?query=workflow%3Alinux)
+
+# NAME
+
+App::RSS::ECBNews - convert ECB news page to RSS
