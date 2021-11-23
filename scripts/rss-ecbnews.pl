@@ -58,8 +58,8 @@ for my $item (@posts) {
 
     my $date = DateTime->new( year => $1, month => $2, day => $3 );
 
-    use Data::Dumper;
-    warn Dumper $item;
+    #use Data::Dumper;
+    #warn Dumper $item;
 
     my $title = $item->{title};
     $rss->add_item(
