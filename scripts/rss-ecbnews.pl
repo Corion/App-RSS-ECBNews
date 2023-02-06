@@ -14,10 +14,12 @@ use Getopt::Long;
 GetOptions(
     'output|o=s' => \my $output_rss,
     'title|t=s'  => \my $title,
+    'url|u=s'    => \my $news_url,
 );
 
 $output_rss //= 'ecbnews.rss';
 $title //= 'ECB PAYM news';
+$news_url //= 'https://www.ecb.europa.eu/paym/intro/news/html/index.en.html';
 
 my $rss = XML::RSS->new(version => '2.0');
 
@@ -37,7 +39,6 @@ $rss->channel(
     },
 );
 
-my $news_url = 'https://www.ecb.europa.eu/paym/intro/news/html/index.en.html';
 my $html = get $news_url;
 
 my @posts = grep { $_->{title} } scrape(
