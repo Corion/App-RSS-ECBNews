@@ -23,7 +23,7 @@ $news_url //= 'https://www.ecb.europa.eu/paym/intro/news/html/index.en.html';
 
 my $rss = XML::RSS->new(version => '2.0');
 
-my $base = 'https://corion.net/rss/ecb-paym.rss';
+my $base = 'https://corion.net/rss/' . $rss;
 
 my $now = DateTime->from_epoch( epoch => time() );
 
