@@ -15,6 +15,7 @@ GetOptions(
     'output|o=s' => \my $output_rss,
     'title|t=s'  => \my $title,
     'url|u=s'    => \my $news_url,
+    'dry-run|n'  => \my $dryrun,
 );
 
 $output_rss //= 'ecbnews.rss';
@@ -50,9 +51,10 @@ my @posts = grep { $_->{title} } scrape(
     },
     {
         base => $news_url,
-        },
+    },
 );
 
+my @out;
 for my $item (@posts) {
     my $url = $item->{url};
 
@@ -65,21 +67,32 @@ for my $item (@posts) {
     #warn Dumper $item;
 
     my $title = $item->{title};
-    $rss->add_item(
-        title => $title,
-        uri => $url,
-        permalink => $url,
-        link => $url,
-        dc => {
-            subject   => $title,
-            creator   => basename $0,
-            date      => $date,
-        },
-        pubDate      => $date,
-    );
+
+    if( $dryrun ) {
+        push @out, [ $date, $title, $url ];
+    } else {
+        $rss->add_item(
+            title => $title,
+            uri => $url,
+            permalink => $url,
+            link => $url,
+            dc => {
+                subject   => $title,
+                creator   => basename $0,
+                date      => $date,
+            },
+            pubDate      => $date,
+        );
+    };
 };
 
-open my $fh, '>', $output_rss
-    or die "Couldn't write RSS file '$output_rss': $!";
-
-print { $fh } $rss->as_string;
+if( $dryrun ) {
+    require Text::Table;
+    my $tt = Text::Table->new('date', 'title', 'url');
+    $tt->load( @out );
+    say "$tt";
+} else {
+    open my $fh, '>', $output_rss
+        or die "Couldn't write RSS file '$output_rss': $!";
+    print { $fh } $rss->as_string;
+}
