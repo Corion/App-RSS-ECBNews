@@ -13,9 +13,11 @@ use Getopt::Long;
 
 GetOptions(
     'output|o=s' => \my $output_rss,
+    'title|t=s'  => \my $title,
 );
 
 $output_rss //= 'ecbnews.rss';
+$title //= 'ECB PAYM news';
 
 my $rss = XML::RSS->new(version => '2.0');
 
@@ -24,9 +26,9 @@ my $base = 'https://corion.net/rss/ecb-paym.rss';
 my $now = DateTime->from_epoch( epoch => time() );
 
 $rss->channel(
-    title => 'ECB PAYM news',
+    title        => $title,
     link         => "$base",
-    description  => "ECB PAYM news",
+    description  => $title,
     lastBuildDate => $now,
     syn => {
         updatePeriod    => 'daily',
