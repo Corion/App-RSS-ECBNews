@@ -59,6 +59,8 @@ my %module = (
         'XML::RSS'           => 0,
         'App::scrape'        => 0,
         'DateTime'           => 0,
+        'DateTime::Format::Mail'           => 0,
+        'LWP::Simple'        => 0,
     },
     TEST_REQUIRES => {
         'Test::More'   => 0,
