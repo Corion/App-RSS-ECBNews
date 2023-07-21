@@ -5,8 +5,8 @@ Makefile.old
 *.swp
 pm_to_blib
 blib/
-WWW-Mechanize-Chrome-*
-WWW-Mechanize-Chrome-*/
+App-RSS-ECBNews-*
+App-RSS-ECBNews-*/
 .releaserc
 cover_db
 firefox-versions/
